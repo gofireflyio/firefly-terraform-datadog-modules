@@ -1,6 +1,6 @@
 output "datadog_monitor_id" {
     value = datadog_monitor.this.id
-    descdescription = "ID of the crearted monitor"
+    description = "ID of the crearted monitor"
 }
 
 output "datadog_monitor_name" {

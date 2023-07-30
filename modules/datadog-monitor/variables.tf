@@ -169,13 +169,13 @@ variable "include_tags" {
 variable "enable_logs_sample" {
     type = bool
     description = "Indicates whether the monitor will be included in logs sample"
-    default = false
+    default = null
 }
 
 variable "force_delete" {
     type = bool
     description = "Indicates whether the monitor will be deleted even if it's still referenced by other resources"
-    default = false
+    default = null
 }
 
 variable "tags" {

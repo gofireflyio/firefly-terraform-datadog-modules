@@ -106,12 +106,6 @@ variable "trigger_window_threshold" {
     default = null
 }
 
-variable "escalation_message" {
-    type = string
-    description = "Message to include with escalation notifications"
-    default = null
-}
-
 variable "require_full_window" {
     type = bool
     description = "Require full window for monitor"
@@ -152,10 +146,6 @@ variable "renotify_statuses" {
     type = set(string)
     description = "The statuses to re-notify on"
     default = []
-    validation {
-        condition = can(regex("^(warn|no data|alert)$", each))
-        error_message = "Invalid renotify status, must be one of ok, warn, no data, alert"
-    }
 }
 
 variable "notify_audit" {

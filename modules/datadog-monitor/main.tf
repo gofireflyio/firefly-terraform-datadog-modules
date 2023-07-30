@@ -19,28 +19,28 @@ resource "datadog_monitor" "this" {
     priority                 = var.priority
     renotify_statuses        = var.renotify_statuses
 
-    # dynamic "monitor_thresholds" {
-    #     for_each = length(var.monitor_thresholds) > 0 ? [var.monitor_thresholds] : []
-    #     content {
-    #         warning = try(monitor_thresholds.value.warning, null)
-    #         warning_recovery = try(monitor_thresholds.value.warning_recovery, null)
-    #         critical = try(monitor_thresholds.value.critical, null)
-    #         critical_recovery = try(monitor_thresholds.value.critical_recovery, null)
-    #         ok = try(monitor_thresholds.value.ok, null)
-    #     }
-    # }
+    dynamic "monitor_thresholds" {
+        for_each = length(var.monitoring_threshold) > 0 ? [var.monitoring_thresholds] : []
+        content {
+            warning = try(monitoring_thresholds.value.warning, null)
+            warning_recovery = try(monitoring_threshold.value.warning_recovery, null)
+            critical = try(monitoring_threshold.value.critical, null)
+            critical_recovery = try(monitoring_threshold.value.critical_recovery, null)
+            ok = try(monitoring_threshold.value.ok, null)
+        }
+    }
 
-    # dynamic "monitor_threshold_windows" {
-    #     for_each = length(var.monitor_threshold_windows) > 0 ? [var.monitor_threshold_windows] : []
-    #     content {
-    #         recovery_window = try(monitor_threshold_windows.value.recovery_window, null)
-    #         trigger_window  = try(monitor_threshold_windows.value.trigger_window, null)
-    #     }
-    # }
+    dynamic "monitor_threshold_windows" {
+        for_each = length(var.monitoring_threshold_windows) > 0 ? [var.monitoring_threshold_windows] : []
+        content {
+            recovery_window = try(monitoring_threshold_windows.value.recovery_window, null)
+            trigger_window  = try(monitoring_threshold_windows.value.trigger_window, null)
+        }
+    }
 
-    monitor_thresholds = var.monitor_thresholds
+    # monitor_thresholds = var.monitor_thresholds
 
-    monitor_threshold_windows = var.monitor_threshold_windows
+    # monitor_threshold_windows = var.monitor_threshold_windows
 
     restricted_roles = var.restricted_roles
     validate = true

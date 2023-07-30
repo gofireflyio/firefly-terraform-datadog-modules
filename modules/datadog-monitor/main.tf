@@ -33,7 +33,6 @@ resource "datadog_monitor" "this" {
     trigger_window  = var.trigger_window_threshold
     }
 
-    restricted_roles = try(var.restricted_roles_map[each.key], null)
-
+    restricted_roles = var.restricted_roles
     validate = true
   }

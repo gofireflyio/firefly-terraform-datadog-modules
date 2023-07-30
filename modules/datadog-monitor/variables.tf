@@ -46,37 +46,37 @@ variable "escalation_message" {
 }
 
 variable "warning_threshold" {
-    type = number
+    type = string
     description = "Warning threshold for the monitor"
     default = null
 }
 
 variable "waring_recovery_threshold" {
-    type = number
+    type = string
     description = "Warning recovery threshold for the monitor"
     default = null
 }
 
 variable "critical_threshold" {
-    type = number
+    type = string
     description = "Critical threshold for the monitor"
     default = null
 }
 
 variable "critical_recovery_threshold" {
-    type = number
+    type = string
     description = "Critical recovery threshold for the monitor"
     default = null
 }
 
 variable "ok_threshold" {
-    type = number
+    type = string
     description = "OK threshold for the monitor"
     default = null
 }
 
 variable "unknown_threshold" {
-    type = number
+    type = string
     description = "Unknown threshold for the monitor"
     default = null
 }
@@ -176,7 +176,7 @@ variable "force_delete" {
 }
 
 variable "tags" {
-    type = set(string)
+    type = list(string)
     description = "A map of tags to apply to the monitor"
     default = []
 }
@@ -184,15 +184,11 @@ variable "tags" {
 variable "priority" {
     type = number
     description = "Integer from 1 (high) to 5 (low) indicating alert severity"
-    default = 1
-    validation {
-      condition = contains([1, 2, 3, 4, 5], var.priority)
-      error_message = "Invalid priority, must be an integer from 1 (high) to 5 (low)"
-    }
+    default = 0
 }
 
 variable "restricted_roles" {
-    type = set(string)
+    type = list(string)
     description = "A list of roles that are allowed to edit this monitor"
     default = []
 }

@@ -45,7 +45,7 @@ variable "escalation_message" {
     default = ""
 }
 
-variable "monitoring_threshold" {
+variable "monitor_thresholds" {
     type = any
     description = "Thresholds for the monitor"
     default = {}

@@ -19,18 +19,23 @@ resource "datadog_monitor" "this" {
     priority                 = var.priority
     renotify_statuses        = var.renotify_statuses
 
-    monitor_thresholds {
-        warning = var.warning_threshold
-        warning_recovery = var.warning_recovery_threshold
-        critical = var.critical_threshold
-        critical_recovery = var.critical_recovery_threshold
-        ok = var.ok_threshold
-        unknown = var.unknown_threshold
+    dynamic "monitor_thresholds" {
+        for_each = length(var.monitor_thresholds) > 0 ? [var.monitor_thresholds] : []
+        content {
+            warning = try(monitor_thresholds.value.warning, null)
+            warning_recovery = try(monitor_thresholds.value.warning_recovery, null)
+            critical = try(monitor_thresholds.value.critical, null)
+            critical_recovery = try(monitor_thresholds.value.critical_recovery, null)
+            ok = try(monitor_thresholds.value.ok, null)
+        }
     }
 
-    monitor_threshold_windows {
-    recovery_window = var.recovery_window_threshold
-    trigger_window  = var.trigger_window_threshold
+    dynamic "monitor_threshold_windows" {
+        for_each = length(var.monitor_threshold_windows) > 0 ? [var.monitor_threshold_windows] : []
+        content {
+            recovery_window = try(monitor_threshold_windows.value.recovery_window, null)
+            trigger_window  = try(monitor_threshold_windows.value.trigger_window, null)
+        }
     }
 
     restricted_roles = var.restricted_roles

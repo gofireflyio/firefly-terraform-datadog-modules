@@ -45,6 +45,19 @@ variable "escalation_message" {
     default = ""
 }
 
+variable "monitoring_threshold" {
+    type = any
+    description = "Thresholds for the monitor"
+    default = {}
+}
+
+variable "monitoring_threshold_windows" {
+    type = any
+    description = "Threshold Windows for the monitor"
+    default = {}
+}
+
+
 variable "warning_threshold" {
     type = string
     description = "Warning threshold for the monitor"
